@@ -4,7 +4,8 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour {
     public enum DrawMode {
         NoiseMap,
-        ColourMap
+        ColourMap,
+        Mesh
     }
 
     public DrawMode drawMode = DrawMode.NoiseMap;
@@ -22,6 +23,7 @@ public class MapGenerator : MonoBehaviour {
     public float lacunarity = 2f;
     
     public Vector2 offset = new Vector2(0, 0);
+    public float meshHeightMultiplier = 1f;
     public bool autoUpdate = true;
 
     public TerrainType[] regions;
@@ -54,6 +56,11 @@ public class MapGenerator : MonoBehaviour {
             case DrawMode.ColourMap:
                 display.DrawTexture(TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
                 break;
+            
+            case DrawMode.Mesh:
+                display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier), TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
+                break;
+            
             default:
                 throw new ArgumentOutOfRangeException();
         }

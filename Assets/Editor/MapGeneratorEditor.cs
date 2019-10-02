@@ -12,7 +12,7 @@ public class MapGeneratorEditor : Editor {
             }
         }
 
-        if (GUILayout.Button("Generate Noise Map")) {
+        if (GUILayout.Button("Generate")) {
             mapGenerator.GenerateMap();
         }
     }
